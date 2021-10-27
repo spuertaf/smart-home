@@ -17,7 +17,7 @@ String messageToNodeMcu; //mensaje que el Arduino enviara al NodeMCU
 int numberOfPeopleInRoom = 0; 
 
 void setup() {
-  
+  //definicion de pines como input o output
   pinMode(pot1Pin, INPUT);
   pinMode(pot2Pin, INPUT);
   pinMode(fotoResistorPin, INPUT);
