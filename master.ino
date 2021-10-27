@@ -1,4 +1,4 @@
-#include "DHT.h"
+#include "DHT.h" //libreria para uso de metodos de sensor temperatura y humedad DHT11
 #define DHTPIN A4
 #define DHTTYPE DHT11 //tipo de sensor DHT: DHT11
 
