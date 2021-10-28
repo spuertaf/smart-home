@@ -5,8 +5,8 @@
 #include <ESP8266WiFi.h>                                       //libreria para funciones WiFi de ESP8266 para envio de datos
 #include <BlynkSimpleEsp8266.h>                                //libreria para funciones de blynk para el envio de datos a la plataforma 
 char auth[]     = BLYNK_AUTH_TOKEN;
-char ssid[]     = "ARRIS-4A9A";                                //nombre de red
-char password[] = "ECA9404D4A9A";                              //contraseña de red
+char ssid[]     = "IoT-B19";                                //nombre de red
+char password[] = "lcontrol2020*";                              //contraseña de red
 
 void setup() {
   // definicion comunicacion serial
@@ -39,12 +39,10 @@ void sendBlynk(String oneSensorAndValue){
     Blynk.virtualWrite(V2, sensorValue);
   } else if (sensorName == "agu"){ //nivel agua 1
     Blynk.virtualWrite(V3, sensorValue);
-  } else if (sensorName == "agu2 "){ //nivel agua 2
+  } else if (sensorName == "agu2"){ //nivel agua 2
     Blynk.virtualWrite(V4, sensorValue);
   } else if (sensorName == "lum"){ //luminocidad captada por la fotoresistencia
     Blynk.virtualWrite(V5, sensorValue);
-  } else if (sensorName == "per"){ //personas en la habitacion
-    Blynk.virtualWrite(V6, sensorValue);
   }
 }
 
