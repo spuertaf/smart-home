@@ -2,51 +2,56 @@
 #define DHTPIN A4
 #define DHTTYPE DHT11 //tipo de sensor DHT: DHT11
 
-DHT dht(DHTPIN, DHTTYPE); //inicializacion objeto DHT11, sensor temperatura y humedad
+DHT dht(DHTPIN, DHTTYPE);
 
-int pot1Pin = A0;
-int pot2Pin = A1;
-int fotoResistorPin = A5;
-int entranceSensorEchoPin = 13; 
-int entranceSensorTriggerPin = 12;
-int exitSensorEchoPin = 10; 
-int exitSensorTriggerPin = 11; 
-int gasSensorPin = A4;
-float dhtHumidity, dhtTemperature; 
-String messageToNodeMcu; //mensaje que el Arduino enviara al NodeMCU
-int numberOfPeopleInRoom = 0; 
+int gasSensorPin             = A0;
+int pot1Pin                  = A1;
+int pot2Pin                  = A2;
+int fotoResistorPin          = A3;
+int entranceSensorEchoPin    = 13; //Digital
+int entranceSensorTriggerPin = 12; //Digital
+int exitSensorEchoPin        = 10; //Digital
+int exitSensorTriggerPin     = 11; //Digital
+int numberOfPeopleInRoom     = 0;
 
 void setup() {
   //definicion de pines como input o output
-  pinMode(pot1Pin, INPUT);
-  pinMode(pot2Pin, INPUT);
-  pinMode(fotoResistorPin, INPUT);
-  pinMode(gasSensorPin, INPUT);
-  pinMode(entranceSensorEchoPin, INPUT);
+  pinMode(pot1Pin,                  INPUT);
+  pinMode(pot2Pin,                  INPUT);
+  pinMode(fotoResistorPin,          INPUT);
+  pinMode(gasSensorPin,             INPUT);
+  pinMode(entranceSensorEchoPin,    INPUT);
   pinMode(entranceSensorTriggerPin, OUTPUT);
+  pinMode(exitSensorEchoPin,        INPUT);
+  pinMode(exitSensorTriggerPin,     OUTPUT);
+  
   digitalWrite(entranceSensorTriggerPin, LOW);
-  pinMode(exitSensorEchoPin, INPUT);
-  pinMode(exitSensorTriggerPin, OUTPUT);
-  digitalWrite(exitSensorTriggerPin, LOW);
+  digitalWrite(exitSensorTriggerPin,     LOW);
+  Serial.begin(9600);
   dht.begin();
-  Serial.begin(9600);
-  Serial.begin(9600);
 }
 
 void loop() {
-  messageToNodeMcu = ""; //mensaje que el Arduino enviara al NodeMCU
-  dhtHumidity = getDhtHumidity();
-  dhtTemperature = getDhtTemperature();
-  //por convencion usamos 3 letras para definir los nombres de los sensores
-  messageToNodeMcu = floatToString("hum",dhtHumidity); 
-  messageToNodeMcu += floatToString("tem",dhtTemperature);
-  messageToNodeMcu += floatToString("wa1",getPotPercentage(pot1Pin));
-  messageToNodeMcu += floatToString("wa2",getPotPercentage(pot2Pin));
-  messageToNodeMcu += floatToString("gas", analogRead(gasSensorPin));
-  messageToNodeMcu += floatToString("lum", analogRead(fotoResistorPin));
-  messageToNodeMcu += floatToString ("per", detectPeopleInRoom());
+  String messageToNodeMcu = ""; //mensaje que el Arduino enviara al NodeMCU
+  
+  //para convencion usar 3 letras para definir los nombres de los sensores
+  messageToNodeMcu =  floatToString("hum",  getDhtHumidity()); 
+  messageToNodeMcu += floatToString("tem",  getDhtTemperature());
+  messageToNodeMcu += floatToString("agu",  getPotPercentage(pot1Pin));
+  messageToNodeMcu += floatToString("agu2", getPotPercentage(pot2Pin));
+  messageToNodeMcu += floatToString("per",  detectPeopleInRoom());
+  messageToNodeMcu += floatToString("gas",  getGas());
+  messageToNodeMcu += floatToString("lum",  getIllumination());
   Serial.println(messageToNodeMcu);
-  delay(100);
+  delay(1000);
+}
+
+float getIllumination(){
+  return analogRead(fotoResistorPin);
+}
+
+float getGas(){
+  return analogRead(gasSensorPin);
 }
 
 float getDhtHumidity(){
@@ -56,7 +61,7 @@ float getDhtHumidity(){
 
 float getDhtTemperature(){
   //este metodo retorna en flotante el valor de la temperatura cpatado por el sensor DHT11
-  return dht.readTemperature(); 
+  return dht.readTemperature();
 }
 
 String floatToString(String sensorName, float value){
@@ -87,10 +92,10 @@ float getDistanceSensorDistance(int sensorEchoPin, int sensorTriggerPin){
 int detectPeopleInRoom(){
   //metodo para poder detectar cuantas personas se encuentran en la estancia en el momento
   float entranceSensorDistance = getDistanceSensorDistance(entranceSensorEchoPin, entranceSensorTriggerPin);
-  float exitSensorDistance = getDistanceSensorDistance(exitSensorEchoPin, exitSensorTriggerPin);
-  if (entranceSensorDistance < 10.00){ //alguien entro en la estacion ya que la distancia sensada se acorta
+  float exitSensorDistance     = getDistanceSensorDistance(exitSensorEchoPin, exitSensorTriggerPin);
+  if (entranceSensorDistance < 10.00){ //alguien entro en la habitacion
     numberOfPeopleInRoom += 1;
-  } else if ((exitSensorDistance < 10.00) and (numberOfPeopleInRoom > 0)){ //alguien salio de la habitacion ya que la distancia sensada se acorta
+  } else if ((exitSensorDistance < 10.00) and (numberOfPeopleInRoom > 0)){ //alguien salio de la habitacion
     numberOfPeopleInRoom -= 1;
   }
   return numberOfPeopleInRoom;
