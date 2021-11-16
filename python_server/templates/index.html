@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Final conmutacion</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        <link rel="stylesheet" href="static/css/styles.css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type='text/javascript' src='static/js/script.js'></script>
+         <script src="http://code.highcharts.com/highcharts.js"></script>
+    </head>
+
+    <body>
+
+        <div class="jumbotron">
+            <h1 class="text-center text-black">SmartHome</h1>
+            <h2 class="text-center text-black">Proyecto final de Teoría de la Conmutación</h2>
+            <h5 class="text-center text-black">Juan Manuel Muñoz y Santiago Puerta Florez</h5>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                <div class="card-counter green">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span class="count-numbers sensorGas">0</span>
+                    <span class="count-name">Gas</span>
+                </div>
+                </div>
+
+                <div class="col-md-3">
+                <div class="card-counter red">
+                    <i class="fa fa-thermometer-empty"></i>
+                    <span class="count-numbers sensorTemperature">0</span>
+                    <span class="count-name">Temperatura</span>
+                </div>
+                </div>
+
+                <div class="col-md-3">
+                <div class="card-counter blue">
+                    <i class="fa fa-tint"></i>
+                    <span class="count-numbers sensorHumidity">0</span>
+                    <span class="count-name">Humedad</span>
+                </div>
+                </div>
+
+                <div class="col-md-3">
+                <div class="card-counter yellow">
+                    <i class="fa fa-sun-o"></i>
+                    <span class="count-numbers sensorIllumination">0</span>
+                    <span class="count-name">Iluminación</span>
+                </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                <div class="card-counter orange">
+                    <i class="fa fa-tint"></i>
+                    <span class="count-numbers sensorWater1">0</span>
+                    <span class="count-name">Llave de agua 1</span>
+                </div>
+                </div>
+
+                <div class="col-md-3">
+                <div class="card-counter purple">
+                    <i class="fa fa-tint"></i>
+                    <span class="count-numbers sensorWater2">0</span>
+                    <span class="count-name">Llave de agua 2</span>
+                </div>
+                </div>
+
+                <div class="col-md-3">
+                <div class="card-counter pink">
+                    <i class="fa fa-volume-up"></i>
+                    <span class="count-name">Switch buzzer</span>
+                    <label class="switch">
+                        <input type="checkbox", class="switchBuzzer">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                </div>
+
+                <div class="col-md-3">
+                <div class="card-counter dark_green">
+                    <i class="fa fa-lightbulb-o"></i>
+                    <span class="count-name">Switch led</span>
+                    <label class="switch">
+                        <input type="checkbox", class="switchLed">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" id="temperatureTable"></div>
+        <div class="container" id="humidityTable"></div>
+        <div class="container" id="gasTable"></div>
+        <div class="container" id="illuminationTable"></div>
+        <div class="container" id="water1Table"></div>
+        <div class="container" id="water2Table"></div>
+ 
+    </body>
+</html>
+
+
+
