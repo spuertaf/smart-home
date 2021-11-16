@@ -29,3 +29,6 @@ La presente sección dará especificaciones sobre el código usado para el corre
 |Flask    |Framework para la construcción de aplicaciones web. | [HTTP_connection.py](https://github.com/spuertaf/smart-home/blob/main/python_server/HTTP_connection.py) | [pypi.org](https://pypi.org/project/Flask/) |
 |json |Serializado de Json. | [HTTP_connection.py](https://github.com/spuertaf/smart-home/blob/main/python_server/HTTP_connection.py) |[pypi.org](https://pypi.org/project/jsonlib/) |
 |time |Acceso a tiempos y conversiones. | [HTTP_connection.py](https://github.com/spuertaf/smart-home/blob/main/python_server/HTTP_connection.py) | [docs.python.org](https://docs.python.org/3/library/time.html) |
+
+<br/><br/>
+
