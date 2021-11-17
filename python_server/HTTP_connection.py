@@ -6,9 +6,11 @@ from DataHandler import DataHandler
 dataHandler = DataHandler(0,0,0,0,0,0, False, False)
 app = Flask(__name__) #servidor donde estara alojada la pagina web
 
+
 @app.route('/', methods=["GET", "POST"]) #comando, cada vez que lo ejecuto se ejecutan las fuciones que el comando posee
 def main():
     return render_template('index.html') #retorna plantilla html de la pagina web
+
 
 @app.route('/data', methods=["GET", "POST"])
 def data():
@@ -26,19 +28,20 @@ def data():
     
     response = make_response(json.dumps(dataJson)) 
     response.content_type = 'application/json' #contenido de la respuesta del servidor
-
     return response 
+
 
 @app.route('/postData')
 def readData() -> str:
     '''metodo para mandar los datos captados por los sensores a la pagina web'''
-    dataHandler.setIllumination(request.args.get('illumination'))
-    dataHandler.setTemperature(request.args.get('temperature'))
-    dataHandler.setHumidity(request.args.get('humidity'))
-    dataHandler.setWater2(request.args.get('water2'))
+    dataHandler.setIllumination(request.args.get('ill'))
+    dataHandler.setTemperature(request.args.get('tem'))
+    dataHandler.setHumidity(request.args.get('hum'))
+    dataHandler.setWater2(request.args.get('wa2'))
     dataHandler.setGas(request.args.get('gas'))
-    dataHandler.setWater1(request.args.get('water1'))
+    dataHandler.setWater1(request.args.get('wa1'))
     return str(dataHandler)
+
 
 @app.route('/getData')
 def getData() -> dict:
@@ -48,13 +51,12 @@ def getData() -> dict:
         'isLedActive'   :  dataHandler.getIsLedActive()
     }
 
+
 @app.route('/sendSwitchsData', methods=['POST'])
 def sendSwitchsData() -> str:
     '''metodo para enviar a la pagina web el estado del led y del buzzer'''
     dataHandler.setIsBuzzerActive(request.form['buzzer'] == 'true')
     dataHandler.setIsLedActive(request.form['led'] == 'true')
-    
-    print(dataHandler.getIsBuzzerActive(), "  ", dataHandler.getIsLedActive())
     return ""
 
 if __name__ == '__main__':
