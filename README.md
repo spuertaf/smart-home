@@ -19,6 +19,7 @@ La presente sección dará especificaciones sobre el código usado para el corre
 |----------| ------------|----------------------|------------------|
 |DHT.h     |Liberia para uso de sensor de temperatura y humedad DHT11. |[master.ino](https://github.com/spuertaf/smart-home/blob/main/master.ino) | [programarfacil.com](https://programarfacil.com/blog/arduino-blog/sensor-dht11-temperatura-humedad-arduino/)|
 |ESP8266WiFi.h |Rutinas del ESP8266 para conectarse a la red. | [slave.ino](https://github.com/spuertaf/smart-home/blob/main/slave.ino) | [esp8266-arduino](https://github.com/spuertaf/smart-home/blob/main/slave.ino) |
+|ArduinoJson.h |Librería para uso de JSON, serialización, deserializacion y más. |[slave.ino](https://github.com/spuertaf/smart-home/blob/main/slave.ino) |[arduinolibraries.info](https://www.arduinolibraries.info/libraries/arduino-json) |  
 
 <br/><br/>
 
@@ -28,7 +29,7 @@ La presente sección dará especificaciones sobre el código usado para el corre
 |---------|-------------|----------------------|------------------|
 |Flask    |Framework para la construcción de aplicaciones web. | [HTTP_connection.py](https://github.com/spuertaf/smart-home/blob/main/python_server/HTTP_connection.py) | [pypi.org](https://pypi.org/project/Flask/) |
 |json |Serializado de Json. | [HTTP_connection.py](https://github.com/spuertaf/smart-home/blob/main/python_server/HTTP_connection.py) |[pypi.org](https://pypi.org/project/jsonlib/) |
-|time |Acceso a tiempos y conversiones. | [HTTP_connection.py](https://github.com/spuertaf/smart-home/blob/main/python_server/HTTP_connection.py) | [docs.python.org](https://docs.python.org/3/library/time.html) |
+|time |Acceso a tiempos y conversiones. | [HTTP_connection.py](https://github.com/spuertaf/smart-home/blob/main/python_server/HTTP_connection.py) | [docs.python.org](https://docs.python.org/3/library/time.html)| 
 
 <br/><br/>
 
