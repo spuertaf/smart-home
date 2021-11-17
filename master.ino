@@ -4,17 +4,18 @@
 
 DHT dht(DHTPIN, DHTTYPE);
 
-int gasSensorPin             = A0;
-int pot1Pin                  = A1;
-int pot2Pin                  = A2;
-int fotoResistorPin          = A3;
+int gasSensorPin    = A0;
+int pot1Pin         = A1;
+int pot2Pin         = A2;
+int fotoResistorPin = A3;
 
 void setup() {
   //definicion de pines como input o output
-  pinMode(pot1Pin,                  INPUT);
-  pinMode(pot2Pin,                  INPUT);
-  pinMode(fotoResistorPin,          INPUT);
-  pinMode(gasSensorPin,             INPUT);
+  pinMode(pot1Pin,         INPUT);
+  pinMode(pot2Pin,         INPUT);
+  pinMode(fotoResistorPin, INPUT);
+  pinMode(gasSensorPin,    INPUT);
+
   Serial.begin(9600);
   dht.begin();
 }
@@ -22,13 +23,13 @@ void setup() {
 void loop() {
   String messageToNodeMcu = ""; //mensaje que el Arduino enviara al NodeMCU
   
-  //para convencion usar 3 letras para definir los nombres de los sensores
-  messageToNodeMcu =  floatToString("hum",  getDhtHumidity()); 
-  messageToNodeMcu += floatToString("tem",  getDhtTemperature());
-  messageToNodeMcu += floatToString("agu",  getPotPercentage(pot1Pin));
-  messageToNodeMcu += floatToString("agu2", getPotPercentage(pot2Pin));
+  //por convencion se usan 3 letras para definir los nombres de los sensores
+  messageToNodeMcu =  floatToString("hum",      getDhtHumidity()); 
+  messageToNodeMcu += floatToString("tem",   getDhtTemperature());
+  messageToNodeMcu += floatToString("wa1",  getPotPercentage(pot1Pin));
+  messageToNodeMcu += floatToString("wa2",  getPotPercentage(pot2Pin));
   messageToNodeMcu += floatToString("gas",  getGas());
-  messageToNodeMcu += floatToString("lum",  getIllumination());
+  messageToNodeMcu += floatToString("ill",  getIllumination());
   Serial.println(messageToNodeMcu);
   delay(1000);
 }
@@ -54,7 +55,7 @@ float getDhtTemperature(){
 String floatToString(String sensorName, float value){
   /*este metodo recibe el nombre del sensor y el valor que capta dicho sensor y 
   retorna un string en forma de llave:valor para ser enviado al NodeMCU*/
-  return sensorName + ":" + value + ",";
+  return sensorName + "=" + (int) value + "&";
 }
 
 int getPotPercentage(int potPin){
